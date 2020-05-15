@@ -1,6 +1,5 @@
-REST API with basic CRUD functionality and authentication created for studying purposes.
-
-List of packages used:
-Flask
-Flask-JWT
-Flask-SQLAlchemy
+REST API with basic CRUD functionality and authentication created for studying purposes.<br />
+Packages used:<br />
+Flask<br />
+Flask-JWT<br />
+Flask-SQLAlchemy<br />
