@@ -1,3 +1,4 @@
 .vscode/settings.json
 *.pyc
 data.db
+__pycache__/
