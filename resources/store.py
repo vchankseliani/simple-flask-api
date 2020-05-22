@@ -1,6 +1,7 @@
 from flask_restful import Resource
 from models.store import StoreModel
 
+
 class Store(Resource):
     def get(self, name):
         store = StoreModel.find_by_name(name)
@@ -22,11 +23,13 @@ class Store(Resource):
 
     def delete(self, name):
         store = StoreModel.find_by_name(name)
-        if store:
-            store.delete_from_db()
-
+        if not store:
+            return {'message': 'Store does not exist'}, 404
+        
+        store.delete_from_db()
         return {'message': 'Store deleted'}
+
 
 class StoreList(Resource):
     def get(self):
-        return {'stores': [store.json() for store in StoreModel.query.all()]}
+        return {'stores': [store.json() for store in StoreModel.find_all()]}

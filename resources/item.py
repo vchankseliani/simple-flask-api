@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 from flask_jwt import jwt_required
 from models.item import ItemModel
+from models.store import StoreModel
+
 
 class Item(Resource):
     parser = reqparse.RequestParser() #initialise parser
@@ -29,6 +31,10 @@ class Item(Resource):
             return {'message': f'An item with name \'{name}\' already exists'}, 400
 
         data = Item.parser.parse_args()
+
+        if not StoreModel.find_by_id(data['store_id']):
+            return {'message': f'Store with store_id: {int(data["store_id"])} not found, please create a store first'}, 400
+
         item = ItemModel(name, **data)
 
         try:
@@ -50,6 +56,9 @@ class Item(Resource):
     def put(self, name):
         data = Item.parser.parse_args()
 
+        if not StoreModel.find_by_id(data['store_id']):
+            return {'message': f'Store with store_id: {int(data["store_id"])} not found, please create a store first'}, 400
+
         item = ItemModel.find_by_name(name)
         
         if item is None:
@@ -65,4 +74,4 @@ class Item(Resource):
 class ItemList(Resource):
     @jwt_required()
     def get(self):
-        return {'items': [item.json() for item in ItemModel.query.all()]}
+        return {'items': [item.json() for item in ItemModel.find_all()]}
