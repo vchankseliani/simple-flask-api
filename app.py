@@ -31,7 +31,7 @@ def add_claims_to_jwt(identity):
 @jwt.expired_token_loader
 def expired_token_callback():
     return jsonify({
-        'message': 'Token is expired'
+        'message': 'Token is expired',
         'error': 'token_expired'
     }), 401
 
