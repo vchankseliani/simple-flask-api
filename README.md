@@ -1,4 +1,4 @@
-## REST API with basic CRUD functionality and authentication created for studying purposes.
+## REST API with basic CRUD functionality and authentication.
 ### Packages used:
 ### Flask
 ### Flask-RESTful
